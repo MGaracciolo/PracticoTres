@@ -1,8 +1,9 @@
 package com.nela.practicotres.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pelicula {
+public class Pelicula implements Serializable {
     private int foto;
     private String titulo;
 

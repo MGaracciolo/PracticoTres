@@ -1,11 +1,13 @@
 package com.nela.practicotres;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +46,15 @@ public class PeliAdapter extends RecyclerView.Adapter<PeliAdapter.ViewHolder> {
         holder.tvTitulo.setText(pelicula.getTitulo());
         holder.tvResenia.setText(pelicula.getResenia());
         holder.ivFoto.setImageResource(pelicula.getFoto());
-
+    holder.btDetalle.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context,SegundaActivity.class);
+            intent.putExtra("pelicula", pelicula);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    });
 
     }
 
@@ -57,11 +67,13 @@ public class PeliAdapter extends RecyclerView.Adapter<PeliAdapter.ViewHolder> {
         private TextView tvResenia;
         private TextView tvTitulo;
         private ImageView ivFoto;
+        private Button btDetalle;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvResenia=itemView.findViewById(R.id.tvResenia);
             tvTitulo=itemView.findViewById(R.id.tvTitulo);
             ivFoto=itemView.findViewById(R.id.ivFoto);
+            btDetalle=itemView.findViewById(R.id.btDetalle);
         }
     }
     public int getCount(){
