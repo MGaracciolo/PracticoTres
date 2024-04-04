@@ -13,23 +13,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.nela.practicotres.databinding.SegundaActivityBinding;
 import com.nela.practicotres.models.Pelicula;
 
 public class SegundaActivity extends AppCompatActivity {
     private SegundaActivityViewModel mv;
+    private SegundaActivityBinding binding;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.segunda_activity);
+        binding= SegundaActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(SegundaActivityViewModel.class);
         mv.getPeliculaMutable().observe(this, new Observer<Pelicula>() {
             @Override
             public void onChanged(Pelicula pelicula) {
-                TextView titulo = findViewById(R.id.tvTitulo);
-                ImageView foto = findViewById(R.id.ivFoto);
-                TextView resenia = findViewById(R.id.tvResenia);
-                TextView director = findViewById(R.id.Director);
-                TextView actores = findViewById(R.id.Actores);
+                TextView titulo=binding.Actores;
+                ImageView foto=binding.Foto;
+                TextView resenia = binding.Resenia;
+                TextView director = binding.Director;
+                TextView actores = binding.Actores;
                 titulo.setText(pelicula.getTitulo());
                 foto.setImageResource(pelicula.getFoto());
                 resenia.setText(pelicula.getResenia());
@@ -38,7 +42,9 @@ public class SegundaActivity extends AppCompatActivity {
             }
         });
         mv.recuperarPeli(getIntent());
-        Button bt = findViewById(R.id.btVolver);
+
+        Button bt =binding.btVolver;
+
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
